@@ -2,4 +2,4 @@
 
 set -e -x
 
-./gradlew clean test
+./gradlew clean build

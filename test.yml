@@ -11,4 +11,4 @@ inputs:
 
 run:
   dir: ./simple-java
-  path: ./build.sh
+  path: ./test.sh
