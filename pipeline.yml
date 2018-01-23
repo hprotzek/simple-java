@@ -1,0 +1,13 @@
+resources:
+  - name: simple-java
+    type: git
+    source:
+      uri: https://github.com/simonjohansson/simple-java.git
+      branch: master
+
+jobs:
+- name: simple-java
+  plan:
+  - get: simple-java
+  - task: run-tests
+    file: simple-java/build.yml

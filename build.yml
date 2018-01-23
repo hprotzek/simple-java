@@ -1,0 +1,14 @@
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: openjdk
+    tag: 8-jdk
+
+inputs:
+- name: simple-java
+
+run:
+  dir: ./simple-java
+  path: ./test.sh
