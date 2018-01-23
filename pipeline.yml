@@ -2,12 +2,13 @@ resources:
   - name: simple-java
     type: git
     source:
-      uri: https://github.com/simonjohansson/simple-java.git
+      uri: https://github.com/hprotzek/simple-java.git
       branch: master
 
 jobs:
 - name: simple-java
   plan:
   - get: simple-java
+    trigger: true
   - task: run-tests
     file: simple-java/build.yml
