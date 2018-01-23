@@ -4,4 +4,4 @@ set -e -x
 
 echo "hello"
 
-./gradlew clean testx
+./gradlew clean test
