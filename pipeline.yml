@@ -4,7 +4,7 @@ resources:
     source:
       uri: https://github.com/hprotzek/simple-java.git
       branch: master
-  - name: stage
+  - name: deploy
     type: cf
     source:
       api: (( api ))
@@ -19,39 +19,41 @@ jobs:
     - get: simple-java
       trigger: true
     - task: build
-      platform: linux
-      image_resource:
-        type: docker-image
-        source:
-          repository: openjdk
-          tag: 8-jdk
-      inputs:
-        - name: simple-java
-      run:
-        dir: simple-java
-        path: gradlew
-        args: clean test
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: openjdk
+            tag: 8-jdk
+        inputs:
+          - name: simple-java
+        run:
+          dir: simple-java
+          path: ./gradlew
+          args: ["clean", "test"]
 
 - name: build-deploy
   plan:
     - get: simple-java
       passed: [test]
     - task: build
-      platform: linux
-      image_resource:
-        type: docker-image
-        source:
-          repository: openjdk
-          tag: 8-jdk
-      inputs:
-        - name: simple-java
-      run:
-        dir: simple-java
-        path: gradlew
-        args: clean build
-      outputs:
-        - name: deploy-artefact
-          path: build
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: openjdk
+            tag: 8-jdk
+        inputs:
+          - name: simple-java
+        run:
+          dir: simple-java
+          path: ./gradlew
+          args: ["clean", "build"]
+        outputs:
+          - name: deploy-artefact
+            path: build
     - put: deploy
       params:
         manifest: simple-java/manifest.yml
