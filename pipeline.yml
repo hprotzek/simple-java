@@ -52,9 +52,24 @@ jobs:
       run:
         dir: simple-java-src
         path: ./gradlew
-        args: ["-PbuildDir=../simple-java-bin", "clean", "build"]
+        args: ["-PbuildDir=../simple-java-bin", "build"]
+
+  - task: debug
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: {repository: busybox}
+
+      inputs:
+      - name: simple-java-bin
+
+      run:
+        dir: simple-java-bin
+        path: ls
+        args: ["libs"]
 
   - put: deploy
     params:
-      manifest: simple-java/manifest.yml
-      path: simple-java-bin
+      manifest: simple-java-src/manifest.yml
+      path: ../simple-java-bin/libs/simple-java-0.0.1-SNAPSHOT.jar
