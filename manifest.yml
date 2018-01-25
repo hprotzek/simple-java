@@ -1,2 +1,3 @@
 applications:
-- name: holgers-simple-java
+- name: simple-java
+  path: build/libs/simple-java-0.0.1-SNAPSHOT.jar

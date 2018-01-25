@@ -63,13 +63,13 @@ jobs:
 
       inputs:
       - name: simple-java-bin
+      - name: simple-java-src
 
       run:
-        dir: simple-java-bin
-        path: ls
-        args: ["libs"]
+        path: find
+        args: ["."]
 
   - put: deploy
     params:
       manifest: simple-java-src/manifest.yml
-      path: ../simple-java-bin/libs/simple-java-0.0.1-SNAPSHOT.jar
+      path: simple-java-bin/libs
