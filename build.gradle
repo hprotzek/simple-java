@@ -18,7 +18,7 @@ group = 'com.example'
 sourceCompatibility = 1.8
 
 if (project.hasProperty('concourse_version')) {
-    project.version = project.concourseVersion
+    project.version = project.concourse_version
 } else {
     project.version = 'LOCAL'
 }
